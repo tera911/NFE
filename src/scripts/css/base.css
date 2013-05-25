@@ -1,0 +1,65 @@
+﻿@charset "utf-8";
+
+body {
+font-family:'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','Meiryo UI','メイリオ',Verdana,'ＭＳ Ｐゴシック',sans-serif;
+}
+p{
+	margin:3px 20px;
+}
+#wrap{
+	margin:0 auto;
+	width:950px;
+}
+.headertxt{
+	float:left;
+	margin:5px 0 5px 10px;
+}
+#menubar{
+	width:700px;
+	float:left;
+	margin:0 auto;
+	padding:0;
+}
+#menubar li{
+	margin:40px 3px 0;
+	padding:20px 0 15px;
+	text-align:center;
+	-webkit-border-radius: 20px 20px 0 0;
+	-moz-border-radius: 20px 20px 0 0;
+	border-radius: 20px 20px 0 0;
+	float:left;
+	display:block;
+	width:130px;
+
+	
+}
+.unlook{
+	background-color:#0066ff;
+	background: -moz-linear-gradient(rgb(0,200,255), rbg(0,100,255));
+	background: -webkit-gradient(linear, left top, left bottom, from(rgb(0,200,255)), to(rgb(0,100,255))); 
+	
+}
+.look{
+	background-color:#00FFff;
+	background: -moz-linear-gradient(rgb(0,200,255), rbg(0,50,200));	
+	background: -webkit-gradient(linear, left top, left bottom, from(rgb(0,255,255)), to(rgb(0,153,204))); 
+}
+#menubar li:hover{
+	background: -moz-linear-gradient(rgb(0,150,255), rbg(0,50,200));	
+	background: -webkit-gradient(linear, left top, left bottom, from(rgb(0,150,255)), to(rgb(0,50,200))); 
+}
+#menubar a{
+	text-decoration:none;
+	color:#333;
+
+	font-size:16px;
+}
+#logo{
+	float:left;
+	margin:0 20px;
+}
+#username{
+	padding:20px 0 0;
+	float:left;
+	width:100px;
+}

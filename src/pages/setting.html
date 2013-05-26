@@ -33,6 +33,10 @@ float:left;
 width:140px;
 height:200px;/* 後で調整 */
 }
+#main dl p{
+	margin:0;
+	font-size:0.75em;
+}
 #main dt{
 margin:20px 20px;
 }
@@ -42,6 +46,11 @@ margin:5px 20px;
 #main div#select{
 	clear:both;
 }
+
+#main dd input[type=radio]{
+	font-size:0.75em;
+}
+
 </style>
 </head>
 <body>
@@ -79,7 +88,7 @@ margin:5px 20px;
 	<div>
 	<dt>通知間隔</dt>
 	<dd>
-	<select name="example">
+	<select name="duration">
 <option value="サンプル1">サンプル1</option>
 <option value="サンプル2">サンプル2</option>
 <option value="サンプル3">サンプル3</option>
@@ -90,11 +99,11 @@ margin:5px 20px;
 	<div>
 	<dt>通知期間</dt>
 	<dd>
-	<select name="example">
-<option value="サンプル1">サンプル1</option>
-<option value="サンプル2">サンプル2</option>
-<option value="サンプル3">サンプル3</option>
-</select>
+<p>開始
+<input type="date" name="example2" value="2012-02-16">
+<p>終了</p>
+<input type="date" name="example2" value="2012-02-16">
+
 	</dd>
 	</div>
 	
@@ -106,11 +115,11 @@ margin:5px 20px;
 	<div>
 	<dt>通知方法</dt>
 	<dd>
-	<input type="radio" name="example" value="サンプル">サンプル
+	<input type="radio" name="example" value="サンプル">ツイート<br>
 
-	<input type="radio" name="example" value="サンプル">サンプル
+	<input type="radio" name="example" value="サンプル">自己リプ<br>
 
-	<input type="radio" name="example" value="サンプル">サンプル
+	<input type="radio" name="example" value="サンプル">自己DM<br>
 	</dd>
 	</div>
 	

@@ -66,7 +66,7 @@
 			 
 			        $( "<a>" )
 			          .attr( "tabIndex", -1 )
-			          .attr( "title", "Show All Items" )
+			         // .attr( "title", "通知を選んでください" )
 			          .tooltip()
 			          .appendTo( this.wrapper )
 			          .button({
@@ -149,7 +149,7 @@
 			  })( jQuery );
 			 
 			  $(function() {
-			    $( "#combobox" ).combobox();
+			    $( ".combobox" ).combobox();
 			  });
 		});
 	</script>
@@ -175,7 +175,7 @@ h4 {
 	text-align: left;
 	width: 900px;
 	height: 150px;
-	border: 1px solid #333;
+	border: 1px solid #AAA;
 }
 
 #main dl>div {
@@ -230,9 +230,9 @@ height:21px;
 				<img width="100px" height="100px" src="" alt="">
 			</div>
 			<ul id="menubar">
-				<li class="look"><a href="#">トップ</a></li>
+				<li class="unlook"><a href="#">トップ</a></li>
 				<li class="unlook"><a href="#">おすすめ</a></li>
-				<li class="unlook"><a href="#">通知選択</a></li>
+				<li class="look"><a href="#">通知選択</a></li>
 				<li class="unlook"><a href="#">注意事項</a></li>
 				<li class="unlook"><a href="#">Q＆A</a></li>
 			</ul>
@@ -251,7 +251,7 @@ height:21px;
 							<dt>通知名</dt>
 							<dd>
 <div class="ui-widget">
-  <select id="combobox">
+  <select class="combobox">
     <option value="">Select one...</option>
     <option value="ActionScript">ActionScript</option>
     <option value="AppleScript">AppleScript</option>
@@ -280,14 +280,18 @@ height:21px;
 							</dd>
 						</div>
 
-						<div>
+						<div style="width:210px;">
 							<dt>通知間隔</dt>
 							<dd>
-								<select name="duration">
-									<option value="サンプル1">サンプル1</option>
-									<option value="サンプル2">サンプル2</option>
-									<option value="サンプル3">サンプル3</option>
-								</select>
+<div class="ui-widget">
+  <select class="combobox">
+    <option value="">選んでくださいな</option>
+    <option value="1">1日</option>
+    <option value="2">2日</option>
+    <option value="3">3日</option>
+    <option value="7">7日</option>
+  </select>
+</div>
 							</dd>
 						</div>
 
@@ -295,11 +299,11 @@ height:21px;
 							<dt>通知期間</dt>
 							<dd>
 								<p>
-									開始 <input type="text" name="start" id="start" size="15">
+									開始 <input type="text" name="start" id="start" size="15" class="ui-widget ui-widget-content ui-state-default">
 								</p>
-								<p>終了</p>
-								<input type="text" name="end" id="end" size="15">
-
+								<p>終了
+								<input type="text" name="end" id="end" size="15" class="ui-widget ui-widget-content ui-state-default">
+								</p>
 							</dd>
 						</div>
 

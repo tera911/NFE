@@ -3,6 +3,9 @@
 *{
 	0;
 }
+body {
+font-family:'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','Meiryo UI','メイリオ',Verdana,'ＭＳ Ｐゴシック',sans-serif;
+}
 p{
 	margin:3px 20px;
 }

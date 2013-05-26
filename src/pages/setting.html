@@ -4,132 +4,329 @@
 <meta http-equiv="Content-Type" Content="text/html;charset=UTF-8">
 <title>通知ったー トップページ</title>
 <link rel="stylesheet" href="./scripts/css/base.css" type="text/css">
-<style type="text/css">
+<link rel="stylesheet" href="./scripts/css/jquery-ui-1.10.3.custom.css"
+	type="text/css">
+<script src="./scripts/js/jquery-1.9.1.js" type="text/javascript"></script>
+<script src="./scripts/js/jquery-ui-1.10.3.custom.js"
+	type="text/javascript"></script>
+<script type="text/javascript">
+	$(function(){	
+		$( "#start" ).datepicker();
+		$( "#end" ).datepicker();
 
-h4{
-	margin:20px;
+		$( "#start" ).datepicker("option", "dateFormat","yy-mm-dd");
+		$( "#end" ).datepicker("option", "dateFormat","yy-mm-dd");
+
+
+		  (function( $ ) {
+			    $.widget( "custom.combobox", {
+			      _create: function() {
+			        this.wrapper = $( "<span>" )
+			          .addClass( "custom-combobox" )
+			          .insertAfter( this.element );
+			 
+			        this.element.hide();
+			        this._createAutocomplete();
+			        this._createShowAllButton();
+			      },
+			 
+			      _createAutocomplete: function() {
+			        var selected = this.element.children( ":selected" ),
+			          value = selected.val() ? selected.text() : "";
+			 
+			        this.input = $( "<input>" )
+			          .appendTo( this.wrapper )
+			          .val( value )
+			          .attr( "title", "" )
+			          .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
+			          .autocomplete({
+			            delay: 0,
+			            minLength: 0,
+			            source: $.proxy( this, "_source" )
+			          })
+			          .tooltip({
+			            tooltipClass: "ui-state-highlight"
+			          });
+			 
+			        this._on( this.input, {
+			          autocompleteselect: function( event, ui ) {
+			            ui.item.option.selected = true;
+			            this._trigger( "select", event, {
+			              item: ui.item.option
+			            });
+			          },
+			 
+			          autocompletechange: "_removeIfInvalid"
+			        });
+			      },
+			 
+			      _createShowAllButton: function() {
+			        var input = this.input,
+			          wasOpen = false;
+			 
+			        $( "<a>" )
+			          .attr( "tabIndex", -1 )
+			          .attr( "title", "Show All Items" )
+			          .tooltip()
+			          .appendTo( this.wrapper )
+			          .button({
+			            icons: {
+			              primary: "ui-icon-triangle-1-s"
+			            },
+			            text: false
+			          })
+			          .removeClass( "ui-corner-all" )
+			          .addClass( "custom-combobox-toggle ui-corner-right" )
+			          .mousedown(function() {
+			            wasOpen = input.autocomplete( "widget" ).is( ":visible" );
+			          })
+			          .click(function() {
+			            input.focus();
+			 
+			            // Close if already visible
+			            if ( wasOpen ) {
+			              return;
+			            }
+			 
+			            // Pass empty string as value to search for, displaying all results
+			            input.autocomplete( "search", "" );
+			          });
+			      },
+			 
+			      _source: function( request, response ) {
+			        var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+			        response( this.element.children( "option" ).map(function() {
+			          var text = $( this ).text();
+			          if ( this.value && ( !request.term || matcher.test(text) ) )
+			            return {
+			              label: text,
+			              value: text,
+			              option: this
+			            };
+			        }) );
+			      },
+			 
+			      _removeIfInvalid: function( event, ui ) {
+			 
+			        // Selected an item, nothing to do
+			        if ( ui.item ) {
+			          return;
+			        }
+			 
+			        // Search for a match (case-insensitive)
+			        var value = this.input.val(),
+			          valueLowerCase = value.toLowerCase(),
+			          valid = false;
+			        this.element.children( "option" ).each(function() {
+			          if ( $( this ).text().toLowerCase() === valueLowerCase ) {
+			            this.selected = valid = true;
+			            return false;
+			          }
+			        });
+			 
+			        // Found a match, nothing to do
+			        if ( valid ) {
+			          return;
+			        }
+			 
+			        // Remove invalid value
+			        this.input
+			          .val( "" )
+			          .attr( "title", value + " didn't match any item" )
+			          .tooltip( "open" );
+			        this.element.val( "" );
+			        this._delay(function() {
+			          this.input.tooltip( "close" ).attr( "title", "" );
+			        }, 2500 );
+			        this.input.data( "ui-autocomplete" ).term = "";
+			      },
+			 
+			      _destroy: function() {
+			        this.wrapper.remove();
+			        this.element.show();
+			      }
+			    });
+			  })( jQuery );
+			 
+			  $(function() {
+			    $( "#combobox" ).combobox();
+			  });
+		});
+	</script>
+<style type="text/css">
+h4 {
+	margin: 20px;
 }
 
 /* ----------メインコンテンツ---------- */
-#main{
-	width:940px;
-	clear:both;
-	border:solid 1px #EEE;
-	margin:0 auto;
-}
-#main h1{
-	margin:60px 0 30px 300px;
-}
-#main dl{
-	margin:10px auto;
-	text-align:left;
-	width:700px;
-	height:150px;
-	border:1px solid #333;
-	
-}
-#main dl > div{
-float:left;
-width:140px;
-height:200px;/* 後で調整 */
-}
-#main dl p{
-	margin:0;
-	font-size:0.75em;
-}
-#main dt{
-margin:20px 20px;
-}
-#main dd{
-margin:5px 20px;
-}
-#main div#select{
-	clear:both;
+#main {
+	width: 940px;
+	clear: both;
+	border: solid 1px #EEE;
+	margin: 0 auto;
 }
 
-#main dd input[type=radio]{
-	font-size:0.75em;
+#main h1 {
+	margin: 60px 0 30px 300px;
 }
 
+#main dl {
+	margin: 10px auto;
+	text-align: left;
+	width: 900px;
+	height: 150px;
+	border: 1px solid #333;
+}
+
+#main dl>div {
+	float: left;
+	width: 160px;
+	height: 200px; /* 後で調整 */
+}
+
+#main dl p {
+	margin: 0;
+	font-size: 0.75em;
+}
+
+#main dt {
+	margin: 20px 20px;
+}
+
+#main dd {
+	margin: 5px 20px;
+}
+
+#main div#select {
+	clear: both;
+}
+
+#main dd input[type=radio] {
+	font-size: 0.75em;
+}
+
+#ui-datepicker-div , #ui-autocomplete-div {
+	font: 70% "Trebuchet MS", sans-serif;
+}
+/* combobox size edit */
+#setting input.custom-combobox-input{
+width:115px;
+height:20px;
+font-size:0.75em;
+margin-left:10px;
+}
+.ui-autocomplete{
+font-size:0.75em;
+}
+.ui-button{
+height:21px;
+}
 </style>
 </head>
 <body>
 	<div id="wrap">
-	<div id="header">
-		<div id="logo"><img width="100px" height="100px"></div>
-		<ul id="menubar">
-			<li class="look"><a href="#">トップ</a></li>
-			<li class="unlook"><a href="#">おすすめ</a></li>
-			<li class="unlook"><a href="#">通知選択</a></li>
-			<li class="unlook"><a href="#">注意事項</a></li>
-			<li class="unlook"><a href="#">Q＆A</a></li>
-		</ul>
-		<div id="username">
-			<!-- UserName -->
-			<p class="headertxt">User:@3mkn</p>
-			<a class="headertxt" href="./clearsession.php">ログアウト</a>
+		<div id="header">
+			<div id="logo">
+				<img width="100px" height="100px" src="" alt="">
+			</div>
+			<ul id="menubar">
+				<li class="look"><a href="#">トップ</a></li>
+				<li class="unlook"><a href="#">おすすめ</a></li>
+				<li class="unlook"><a href="#">通知選択</a></li>
+				<li class="unlook"><a href="#">注意事項</a></li>
+				<li class="unlook"><a href="#">Q＆A</a></li>
+			</ul>
+			<div id="username">
+				<!-- UserName -->
+				<p class="headertxt">User:@3mkn</p>
+				<a class="headertxt" href="./clearsession.php">ログアウト</a>
+			</div>
 		</div>
-	</div>
-	<div id="main">
-<div id="setting">
-	<h4>登録</h4>
-	<dl>
-	<div>
-	<dt>通知名</dt>
-	<dd>
-	<select name="example">
-<option value="サンプル1">サンプル1</option>
-<option value="サンプル2">サンプル2</option>
-<option value="サンプル3">サンプル3</option>
-</select>
-	</dd>
-	</div>
-
-	<div>
-	<dt>通知間隔</dt>
-	<dd>
-	<select name="duration">
-<option value="サンプル1">サンプル1</option>
-<option value="サンプル2">サンプル2</option>
-<option value="サンプル3">サンプル3</option>
-</select>
-	</dd>
-	</div>
-	
-	<div>
-	<dt>通知期間</dt>
-	<dd>
-<p>開始
-<input type="date" name="example2" value="2012-02-16">
-<p>終了</p>
-<input type="date" name="example2" value="2012-02-16">
-
-	</dd>
-	</div>
-	
-	<div>
-	<dt>通知内容</dt>
-	<dd>えらぶ</dd>
-	</div>
-	
-	<div>
-	<dt>通知方法</dt>
-	<dd>
-	<input type="radio" name="example" value="サンプル">ツイート<br>
-
-	<input type="radio" name="example" value="サンプル">自己リプ<br>
-
-	<input type="radio" name="example" value="サンプル">自己DM<br>
-	</dd>
-	</div>
-	
-	</dl>
+		<div id="main">
+			<div id="setting">
+				<h3>登録</h3>
+				<div>
+					<dl>
+						<div style="width:210px;">
+							<dt>通知名</dt>
+							<dd>
+<div class="ui-widget">
+  <select id="combobox">
+    <option value="">Select one...</option>
+    <option value="ActionScript">ActionScript</option>
+    <option value="AppleScript">AppleScript</option>
+    <option value="Asp">Asp</option>
+    <option value="BASIC">BASIC</option>
+    <option value="C">C</option>
+    <option value="C++">C++</option>
+    <option value="Clojure">Clojure</option>
+    <option value="COBOL">COBOL</option>
+    <option value="ColdFusion">ColdFusion</option>
+    <option value="Erlang">Erlang</option>
+    <option value="Fortran">Fortran</option>
+    <option value="Groovy">Groovy</option>
+    <option value="Haskell">Haskell</option>
+    <option value="Java">Java</option>
+    <option value="JavaScript">JavaScript</option>
+    <option value="Lisp">Lisp</option>
+    <option value="Perl">Perl</option>
+    <option value="PHP">PHP</option>
+    <option value="Python">Python</option>
+    <option value="Ruby">Ruby</option>
+    <option value="Scala">Scala</option>
+    <option value="Scheme">Scheme</option>
+  </select>
 </div>
-<div id="select">
-	<h4>選択</h4>
-	
-</div>
-	</div>
+							</dd>
+						</div>
+
+						<div>
+							<dt>通知間隔</dt>
+							<dd>
+								<select name="duration">
+									<option value="サンプル1">サンプル1</option>
+									<option value="サンプル2">サンプル2</option>
+									<option value="サンプル3">サンプル3</option>
+								</select>
+							</dd>
+						</div>
+
+						<div>
+							<dt>通知期間</dt>
+							<dd>
+								<p>
+									開始 <input type="text" name="start" id="start" size="15">
+								</p>
+								<p>終了</p>
+								<input type="text" name="end" id="end" size="15">
+
+							</dd>
+						</div>
+
+						<div>
+							<dt>通知内容</dt>
+							<dd>えらぶ</dd>
+						</div>
+
+						<div>
+							<dt>通知方法</dt>
+							<dd>
+								<input type="radio" name="example" value="サンプル">ツイート<br>
+
+								<input type="radio" name="example" value="サンプル">自己リプ<br>
+
+								<input type="radio" name="example" value="サンプル">自己DM<br>
+							</dd>
+						</div>
+
+					</dl>
+				</div>
+				<div id="select">
+					<h4>選択</h4>
+
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

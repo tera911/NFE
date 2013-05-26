@@ -4,5 +4,5 @@
 		header('Location: ./clearsession.php');
 	}*/
 
-	require_once('./pages/top.html');
+	require_once('./pages/setting.html');
 ?>

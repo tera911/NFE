@@ -30,13 +30,17 @@ p{
 	float:left;
 	display:block;
 	width:130px;
+
 	
 }
 .unlook{
+	background-color:#0066ff;
 	background: -moz-linear-gradient(rgb(0,200,255), rbg(0,100,255));
 	background: -webkit-gradient(linear, left top, left bottom, from(rgb(0,200,255)), to(rgb(0,100,255))); 
+	
 }
 .look{
+	background-color:#00FFff;
 	background: -moz-linear-gradient(rgb(0,200,255), rbg(0,50,200));	
 	background: -webkit-gradient(linear, left top, left bottom, from(rgb(0,255,255)), to(rgb(0,153,204))); 
 }

@@ -20,21 +20,21 @@
         body{
             font-family:'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ',Meiryo,'ＭＳ Ｐゴシック',sans-serif;
             font-size:11px;
-            background-color: #33ccff;
+            background-color: #99DDff;
         }
         #wrap{
-            width:900px;
+            width:950px;
             margin:0 auto;
-            background-color:#ffffff;
+            background-color:#FFFFFF;
         }
         #content{
-            width:880px;
+            width:930px;
             height:530px;
             padding:20px;
         }
         #main{
-            width:550px;
-          height:500px; 
+            width:600px;
+            height:500px; 
             margin:0 auto;
             float:left;
         }
@@ -48,6 +48,7 @@
             width:240px;
             height:110px;
             margin:0 auto;
+            margin-top: 100px;
             padding:20px;
             text-align:center;
             float:right;
@@ -70,6 +71,7 @@
         #detail{
             font-size:1.5em;
             margin:20px auto 0 50px;
+            margin-top: 70px;
             padding:20px 0;
             width:400px;
             text-align:left;

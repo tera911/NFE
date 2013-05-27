@@ -66,7 +66,15 @@
             margin:10px;
             text-align: center;
         }
-        
+        #timeline{
+            margin:0px;
+            width:250px;
+            float: right;
+        }
+        .twitter-timeline{
+            width: 220px;
+        }
+
     </style>
 <body>
     <div id="wrap">
@@ -88,6 +96,21 @@
                 <li>これはああああ</li>
             </ul>
         </div>
+
+        <div id="timeline">            
+            <a class="twitter-timeline" href="https://twitter.com/3mkn" data-widget-id="338889333480226816">Timeline表示テスト</a>
+            <script>
+                !function(d,s,id){
+                    var js,fjs=d.getElementsByTagName(s)[0],
+                    p=/^http:/.test(d.location)?'http':'https';
+                    if(!d.getElementById(id)){
+                        js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";
+                        fjs.parentNode.insertBefore(js,fjs);
+                    }
+                }(document,"script","twitter-wjs");
+            </script>
+        </div>
+        
         <div id="footer">
             <p>Copyright &copy; 2013 M@nyu All Rights Reserved.</p>
         </div>

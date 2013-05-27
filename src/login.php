@@ -20,10 +20,12 @@
         body{
             font-family:'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ',Meiryo,'ＭＳ Ｐゴシック',sans-serif;
             font-size:11px;
+            background-color: #33ccff;
         }
         #wrap{
             width:900px;
             margin:0 auto;
+            background-color:#ffffff;
         }
         #content{
             width:880px;
@@ -39,7 +41,7 @@
         #title{
             padding:20px;
             font-size:3em;
-            margin:5px auto;
+            margin:0 auto;
             text-align:center;
         }
         #login{
@@ -79,6 +81,7 @@
         }
         #footer p{
             margin:10px;
+            padding-bottom: 10px;
             text-align: center;
         }
         #timeline{

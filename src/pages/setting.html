@@ -11,13 +11,6 @@
 	type="text/javascript"></script>
 <script type="text/javascript">
 	$(function(){	
-		$( "#start" ).datepicker();
-		$( "#end" ).datepicker();
-
-		$( "#start" ).datepicker("option", "dateFormat","yy-mm-dd");
-		$( "#end" ).datepicker("option", "dateFormat","yy-mm-dd");
-
-
 		  (function( $ ) {
 			    $.widget( "custom.combobox", {
 			      _create: function() {
@@ -147,11 +140,37 @@
 			      }
 			    });
 			  })( jQuery );
-			 
-			  $(function() {
+		    function setupLabel() {
+		        if ($('.radio input').length) {
+		            $('.radio').each(function(){ 
+		                $(this).removeClass('r_on');
+
+		            });
+		            $('.radio input:checked').each(function(){ 
+		                $(this).parent('label').addClass('r_on');
+		            });
+		        };
+		    };
+		    
+			 //UI Setting
+			  $(document).ready(function() {
 			    $( ".combobox" ).combobox();
+				$( "#start" ).datepicker();
+				$( "#end" ).datepicker();
+
+				$( "#start" ).datepicker("option", "dateFormat","yy-mm-dd");
+				$( "#end" ).datepicker("option", "dateFormat","yy-mm-dd");
+				
+				//radio buttonUI event
+			        $('.radio').click(function(){
+			            setupLabel();
+			        });
+			        setupLabel(); 
 			  });
 		});
+	
+
+
 	</script>
 <style type="text/css">
 h4 {
@@ -221,6 +240,10 @@ font-size:0.75em;
 .ui-button{
 height:21px;
 }
+.radio    { padding-left: 34px; }
+.radio    { background: url(./scripts/css/images/radio_off.png) no-repeat; }
+label.r_on      { background: url(./scripts/css/images/radio_on.png) no-repeat; }
+.radio input  { position: absolute; left: -9999px; }
 </style>
 </head>
 <body>
@@ -298,11 +321,9 @@ height:21px;
 						<div>
 							<dt>通知期間</dt>
 							<dd>
-								<p>
-									開始 <input type="text" name="start" id="start" size="15" class="ui-widget ui-widget-content ui-state-default">
+								<p>開始 <input type="text" name="start" id="start" size="15" class="ui-widget ui-widget-content ui-state-default">
 								</p>
-								<p>終了
-								<input type="text" name="end" id="end" size="15" class="ui-widget ui-widget-content ui-state-default">
+								<p>終了 <input type="text" name="end" id="end" size="15" class="ui-widget ui-widget-content ui-state-default">
 								</p>
 							</dd>
 						</div>
@@ -315,14 +336,13 @@ height:21px;
 						<div>
 							<dt>通知方法</dt>
 							<dd>
-								<input type="radio" name="example" value="サンプル">ツイート<br>
+								<label class="radio" for="do1"><input type="radio" id="do1" name="do" value="1">ツイート</label><br>
 
-								<input type="radio" name="example" value="サンプル">自己リプ<br>
+								<label class="radio" for="do2"><input type="radio" id="do2" name="do" value="2" checked>自己リプ</label><br>
 
-								<input type="radio" name="example" value="サンプル">自己DM<br>
+								<label class="radio" for="do3"><input type="radio" id="do3" name="do" value="3">自己DM</label><br>
 							</dd>
 						</div>
-
 					</dl>
 				</div>
 				<div id="select">

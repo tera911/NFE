@@ -27,15 +27,13 @@
         }
         #content{
             width:880px;
-            height:600px;
+            height:530px;
             padding:20px;
         }
         #main{
             width:550px;
-            height:500px;
-            padding:20px;
+          height:500px; 
             margin:0 auto;
-            background-color: #CCCCCC;
             float:left;
         }
         #title{
@@ -53,17 +51,19 @@
             float:right;
         }
         #login button[type="submit"]{
-            font-size:2em;
+            font-size:2.5em;
             height:70px;
             width:200px;
-            color:#F00;
-            background-color:#0F0FFF;
+            color:#CC0000;
+            background-color:#33aaFF;
             -webkit-border-radius:15px;
             -moz-border-radius:15px;
             border-radius: 15px;
-            border:0px;
-            border-bottom:1px solid #0F0FFF;
-            border-left:1px solid #00F;
+            border:0px;            
+        }
+        #login button:hover{
+            background-color: #66DDFF;
+            color:F00;
         }
         #detail{
             font-size:1.5em;
@@ -105,11 +105,13 @@
                     </form>
                 </div>
                 <div id="detail">
-                    <ul>
-                        <li>これはああああ</li>
-                        <li>これはああああ</li>
-                        <li>これはああああ</li>
-                        <li>これはああああ</li>
+                    <h2>通知ったーについて</h2>
+                    <ul>                        
+                        <li>定期的に、いろんな通知を送るやつです。</li>
+                        <li>簡易的なbotみたいなやつです。</li>
+                        <li>開発中なので、不具合とかあっても自己責任です。</li>
+                        <li>使い方？見ればわかるだろ（威嚇）</li>
+                        <li><b>クドかわいいよぺろぺろ</b></li>
                     </ul>
                 </div>
             </div>

@@ -22,13 +22,27 @@
             font-size:11px;
         }
         #wrap{
-            width:800px;
+            width:900px;
             margin:0 auto;
+        }
+        #content{
+            width:880px;
+            height:600px;
+            padding:20px;
+        }
+        #main{
+            width:550px;
+            height:500px;
+            padding:20px;
+            margin:0 auto;
+            background-color: #CCCCCC;
+            float:left;
         }
         #title{
             padding:20px;
             font-size:3em;
-            margin:5px auto 0 150px;
+            margin:5px auto;
+            text-align:center;
         }
         #login{
             width:240px;
@@ -36,7 +50,7 @@
             margin:0 auto;
             padding:20px;
             text-align:center;
-            
+            float:right;
         }
         #login button[type="submit"]{
             font-size:2em;
@@ -55,8 +69,9 @@
             font-size:1.5em;
             margin:20px auto 0 50px;
             padding:20px 0;
-            width:500px;
+            width:400px;
             text-align:left;
+            float:left;
         }
         #footer{
             width:100%;
@@ -68,49 +83,51 @@
         }
         #timeline{
             margin:0px;
-            width:250px;
-            float: right;
+            width:280px;
+            float:right;
         }
         .twitter-timeline{
-            width: 220px;
+            width: 250px;
+            height: 500px;
         }
-
     </style>
+
 <body>
     <div id="wrap">
         <div id="title">
             <h1>通知ったー α</h1>
         </div>
-        
-        <div id="login">
-            <form action="./redirect.php">
-                <button type="submit">Login</button>
-            </form>
-        </div>
-        
-        <div id="detail">
-            <ul>
-                <li>これはああああ</li>
-                <li>これはああああ</li>
-                <li>これはああああ</li>
-                <li>これはああああ</li>
-            </ul>
-        </div>
+        <div id="content">
+            <div id="main">
+                <div id="login">
+                    <form action="./redirect.php">
+                        <button type="submit">Login</button>
+                    </form>
+                </div>
+                <div id="detail">
+                    <ul>
+                        <li>これはああああ</li>
+                        <li>これはああああ</li>
+                        <li>これはああああ</li>
+                        <li>これはああああ</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="timeline">            
+                <a class="twitter-timeline" href="https://twitter.com/3mkn" data-widget-id="338889333480226816">Timeline表示テスト</a>
+                <script>
+                    !function(d,s,id){
+                        var js,fjs=d.getElementsByTagName(s)[0],
+                        p=/^http:/.test(d.location)?'http':'https';
+                        if(!d.getElementById(id)){
+                            js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";
+                            fjs.parentNode.insertBefore(js,fjs);
+                        }
+                    }(document,"script","twitter-wjs");
+                </script>
+            </div>
+        </div>  
 
-        <div id="timeline">            
-            <a class="twitter-timeline" href="https://twitter.com/3mkn" data-widget-id="338889333480226816">Timeline表示テスト</a>
-            <script>
-                !function(d,s,id){
-                    var js,fjs=d.getElementsByTagName(s)[0],
-                    p=/^http:/.test(d.location)?'http':'https';
-                    if(!d.getElementById(id)){
-                        js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";
-                        fjs.parentNode.insertBefore(js,fjs);
-                    }
-                }(document,"script","twitter-wjs");
-            </script>
-        </div>
-        
         <div id="footer">
             <p>Copyright &copy; 2013 M@nyu All Rights Reserved.</p>
         </div>

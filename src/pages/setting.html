@@ -171,6 +171,9 @@
 			 $('h3').click(function(){
 				$('#setting').css("display","none");
 			 });
+			 
+			 $('div.notice_title').addClass('notice_title ui-corner-all ui-button-text-only ui-state-hover');
+			
 		});
 	
 
@@ -262,6 +265,45 @@ label.r_on {
 .radio input {
 	position: absolute;
 	left: -9999px;
+}
+
+/* 通知リストデザイン */
+#list ul{
+list-style: none;
+}
+#list div.notice_title{
+width:140px;
+height:40px;
+display: block;
+float:left;
+font-size:0.85em;
+text-align:center;
+line-height:3;
+}
+#list li > div.l_text{
+	width:80px;
+	float:left;
+	margin-left:10px;
+}
+#list span{
+flaot:left;
+display:block;
+font-size:0.5em;
+width:60px;
+text-align:center;
+padding-top:3px;
+}
+
+.l_text{
+	width:80px;
+}
+.notice_on{
+background-color:#6E6;
+color:#FFF;
+}
+.notice_off{
+background-color:#E66;
+color:#FFF;
 }
 -->
 </style>
@@ -370,7 +412,13 @@ label.r_on {
 			</div>
 			<div id="select">
 				<h4>選択</h4>
-
+					<div id="list">
+					<ul>
+						<li><div class="notice_title">応用情報技術者試験</div><div class="l_text"><span class="notice_on">通知する</span><span class="notice_off">通知しない</span></div></li>
+						<li><div class="notice_title">基本情報技術者試験</div><div class="l_text"><span class="notice_on">通知する</span><span class="notice_off">通知しない</span></div></li>
+					
+					</ul>
+					</div>
 			</div>
 		</div>
 	</div>

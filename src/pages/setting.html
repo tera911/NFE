@@ -4,7 +4,8 @@
 <meta http-equiv="Content-Type" Content="text/html;charset=UTF-8">
 <title>通知ったー トップページ</title>
 <link rel="stylesheet" href="./scripts/css/base.css" type="text/css">
-<link rel="stylesheet" href="./scripts/css/jquery-ui-1.10.3.custom.css" type="text/css">
+<link rel="stylesheet" href="./scripts/css/jquery-ui-1.10.3.custom.css"
+	type="text/css">
 <script src="./scripts/js/jquery-1.9.1.js" type="text/javascript"></script>
 <script src="./scripts/js/jquery-ui-1.10.3.custom.js"
 	type="text/javascript"></script>
@@ -46,7 +47,7 @@
 			            ui.item.option.selected = true;
 			            this._trigger( "select", event, {
 			              item: ui.item.option
-			            });
+			   	     });
 			          },
 			 
 			          autocompletechange: "_removeIfInvalid"
@@ -151,6 +152,9 @@
 		            });
 		        };
 		    };
+		    $('#setting h3').click(function(){
+		    	$('#setbox').css('display','none');
+		    });
 		    
 			 //UI Setting
 			  $(document).ready(function() {
@@ -173,21 +177,16 @@
 					var noticebar = $(this).parent('div').children('span');
 						changeNoticeBar(noticebar.next('span'));
 						changeNoticeBar(noticebar.prev('span'));
-				
 			 });
-			 
 			 function changeNoticeBar(e){
 				 //notice_onか notice_offを Class属性から取り出す
-				 // 
 				 var n_class = e.attr('class');
 				 var n_type;
-				 
 				 if(n_class.match(/notice_(on|off)/)){
 				 	n_type = n_class.match(/notice_(on|off)/)[0];
 				 }else{
 				 	n_type = n_class;
 				 }
-				 	
 				 	
 				 if(n_type == 'notice_on'){
 					 e.addClass('n_on');
@@ -225,13 +224,14 @@ h4 {
 	margin: 0 auto;
 }
 
-#main h1 {
-	margin: 60px 0 30px 300px;
+h1 ,h2,h3,h4{
+	margin: 1em;
 }
 
-#main p{
-	margin:0;
+#main p {
+	margin: 0;
 }
+
 #main div#setbox {
 	margin: 10px auto;
 	text-align: left;
@@ -240,24 +240,23 @@ h4 {
 	border: 1px solid #AAA;
 }
 
-#main div#setbox > div {
+#main div#setbox>div {
 	float: left;
 	width: 160px;
 	height: 200px; /* 後で調整 */
 }
 
-
-#main div.box > p {
+#main div.box>p {
 	margin: 20px 20px;
 }
-#main div.box div > p{
-	font-size:0.75em;
+
+#main div.box div>p {
+	font-size: 0.75em;
 }
 
 /* #main div.box > div {
 	margin: 5px 20px;
 }*/
-
 #main div#select {
 	clear: both;
 }
@@ -285,6 +284,7 @@ h4 {
 .ui-button {
 	height: 21px;
 }
+
 .radio {
 	padding: 2px 0 2px 34px;
 	background: url(./scripts/css/images/radio_off.png) no-repeat;
@@ -300,47 +300,55 @@ label.r_on {
 }
 
 /* 通知リストデザイン */
-#list ul{
-list-style: none;
-}
-#list div.notice_title{
-width:140px;
-display: block;
-float:left;
-font-size:0.85em;
-text-align:center;
-margin:0 5px;
-padding:10px 0;
-}
-#list li > div.l_text{
-	width:80px;
-	float:left;
-	background-color:#CCC;
-	color:#FFF;
-	margin:3px 5px;
-}
-#list span{
-display:block;
-font-size:0.5em;
-text-align:center;
-padding:3px;
+#list ul {
+	list-style: none;
+	margin:10px 25px;
 }
 
-div.l_text{
-	width:40px;
-
-}
-.notice_on{
-background-color:#6E6;
-color:#FFF;
-cursor:pointer;
-}
-.notice_off{
-background-color:#E66;
-color:#FFF;
-cursor:pointer;
+#list div.notice_title {
+	width: 140px;
+	display: block;
+	float: left;
+	font-size: 0.85em;
+	text-align: center;
+	margin: 0 5px 15px;
+	padding: 10px 0;
 }
 
+#list li>div.l_text {
+	width: 60px;
+	float: left;
+	background-color: #CCC;
+	color: #FFF;
+	margin: 3px 5px;
+}
+
+#list span {
+	display: block;
+	font-size: 0.5em;
+	text-align: center;
+	padding: 3px;
+}
+
+
+
+.notice_on {
+	background-color: #6E6;
+	color: #FFF;
+	cursor: pointer;
+}
+
+.notice_off {
+	background-color: #E66;
+	color: #FFF;
+	cursor: pointer;
+}
+
+
+#select hr{
+clear:both;
+visibility:hidden;
+}
 -->
 </style>
 </head>
@@ -367,94 +375,115 @@ cursor:pointer;
 			<div id="setting">
 				<h3>登録</h3>
 				<div id="setbox">
-						<div class="box" style="width: 210px;">
-							<p>通知名</p>
-							<div>
-								<div class="ui-widget">
-									<select class="combobox">
-										<option value="">Select one...</option>
-										<option value="ActionScript">ActionScript</option>
-										<option value="AppleScript">AppleScript</option>
-										<option value="Asp">Asp</option>
-										<option value="BASIC">BASIC</option>
-										<option value="C">C</option>
-										<option value="C++">C++</option>
-										<option value="Clojure">Clojure</option>
-										<option value="COBOL">COBOL</option>
-										<option value="ColdFusion">ColdFusion</option>
-										<option value="Erlang">Erlang</option>
-										<option value="Fortran">Fortran</option>
-										<option value="Groovy">Groovy</option>
-										<option value="Haskell">Haskell</option>
-										<option value="Java">Java</option>
-										<option value="JavaScript">JavaScript</option>
-										<option value="Lisp">Lisp</option>
-										<option value="Perl">Perl</option>
-										<option value="PHP">PHP</option>
-										<option value="Python">Python</option>
-										<option value="Ruby">Ruby</option>
-										<option value="Scala">Scala</option>
-										<option value="Scheme">Scheme</option>
-									</select>
-								</div>
+					<div class="box" style="width: 210px;">
+						<p>通知名</p>
+						<div>
+							<div class="ui-widget">
+								<select class="combobox">
+									<option value="">Select one...</option>
+									<option value="ActionScript">ActionScript</option>
+									<option value="AppleScript">AppleScript</option>
+									<option value="Asp">Asp</option>
+									<option value="BASIC">BASIC</option>
+									<option value="C">C</option>
+									<option value="C++">C++</option>
+									<option value="Clojure">Clojure</option>
+									<option value="COBOL">COBOL</option>
+									<option value="ColdFusion">ColdFusion</option>
+									<option value="Erlang">Erlang</option>
+									<option value="Fortran">Fortran</option>
+									<option value="Groovy">Groovy</option>
+									<option value="Haskell">Haskell</option>
+									<option value="Java">Java</option>
+									<option value="JavaScript">JavaScript</option>
+									<option value="Lisp">Lisp</option>
+									<option value="Perl">Perl</option>
+									<option value="PHP">PHP</option>
+									<option value="Python">Python</option>
+									<option value="Ruby">Ruby</option>
+									<option value="Scala">Scala</option>
+									<option value="Scheme">Scheme</option>
+								</select>
 							</div>
 						</div>
+					</div>
 
-						<div class="box" style="width: 210px;">
-							<p>通知間隔</p>
-							<div>
-								<div class="ui-widget">
-									<select class="combobox">
-										<option value="">選んでくださいな</option>
-										<option value="1">1日</option>
-										<option value="2">2日</option>
-										<option value="3">3日</option>
-										<option value="7">7日</option>
-									</select>
-								</div>
+					<div class="box" style="width: 210px;">
+						<p>通知間隔</p>
+						<div>
+							<div class="ui-widget">
+								<select class="combobox">
+									<option value="">選んでくださいな</option>
+									<option value="1">1日</option>
+									<option value="2">2日</option>
+									<option value="3">3日</option>
+									<option value="7">7日</option>
+								</select>
 							</div>
 						</div>
+					</div>
 
-						<div class="box">
-							<p>通知期間</p>
-							<div>
-								<p>開始 <input type="text" name="start" id="start" size="15"
-										class="ui-widget ui-widget-content ui-state-default">
-								</p>
-								<p>終了 <input type="text" name="end" id="end" size="15"
-										class="ui-widget ui-widget-content ui-state-default">
-								</p>
-							</div>
+					<div class="box">
+						<p>通知期間</p>
+						<div>
+							<p>
+								開始 <input type="text" name="start" id="start" size="15"
+									class="ui-widget ui-widget-content ui-state-default">
+							</p>
+							<p>
+								終了 <input type="text" name="end" id="end" size="15"
+									class="ui-widget ui-widget-content ui-state-default">
+							</p>
 						</div>
+					</div>
 
-						<div class="box">
-							<p>通知内容</p>
-							<div>えらぶ</div>
+					<div class="box">
+						<p>通知内容</p>
+						<div>えらぶ</div>
+					</div>
+
+					<div class="box">
+
+						<p>通知方法</p>
+						<div>
+							<label class="radio" for="do1"><input type="radio"
+								id="do1" name="do" value="1">ツイート</label><br> <label
+								class="radio" for="do2"><input type="radio" id="do2"
+								name="do" value="2" checked>自己リプ</label><br> <label
+								class="radio" for="do3"><input type="radio" id="do3"
+								name="do" value="3">自己DM</label><br>
 						</div>
-
-						<div class="box">
-
-							<p>通知方法</p>
-														<div>
-								<label class="radio" for="do1"><input type="radio"
-									id="do1" name="do" value="1">ツイート</label><br> <label
-									class="radio" for="do2"><input type="radio" id="do2"
-									name="do" value="2" checked>自己リプ</label><br> <label
-									class="radio" for="do3"><input type="radio" id="do3"
-									name="do" value="3">自己DM</label><br>
-							</div>
-						</div>
+					</div>
 				</div>
 			</div>
 			<div id="select">
-				<h4>選択</h4>
-					<div id="list">
+				<h3>選択</h3>
+				<div id="list">
 					<ul>
-						<li><div class="notice_title">応用情報技術者試験</div><div class="l_text"><span class="n_on">通知する</span><span class="notice_off">通知しない</span></div></li>
-						<li><div class="notice_title">基本情報技術者試験</div><div class="l_text"><span class="notice_on">通知する</span><span class="n_off">通知しない</span></div></li>
-					
+						<li><div class="notice_title">応用情報技術者試験</div>
+							<div class="l_text">
+								<span class="n_on">通知する</span><span class="notice_off">通知しない</span>
+							</div></li>
+						<li><div class="notice_title">基本情報技術者試験</div>
+							<div class="l_text">
+								<span class="notice_on">通知する</span><span class="n_off">通知しない</span>
+							</div></li>
+							<li><div class="notice_title">基本情報技術者試験</div>
+							<div class="l_text">
+								<span class="notice_on">通知する</span><span class="n_off">通知しない</span>
+							</div></li>
+							<li><div class="notice_title">基本情報技術者試験</div>
+							<div class="l_text">
+								<span class="notice_on">通知する</span><span class="n_off">通知しない</span>
+							</div></li>
+							<li><div class="notice_title">基本情報技術者試験</div>
+							<div class="l_text">
+								<span class="notice_on">通知する</span><span class="n_off">通知しない</span>
+							</div></li>
+
 					</ul>
-					</div>
+				</div>
+				<hr>
 			</div>
 		</div>
 	</div>

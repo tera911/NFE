@@ -152,8 +152,20 @@
 		            });
 		        };
 		    };
+		    $('#setting h3').button();
 		    $('#setting h3').click(function(){
-		    	$('#setbox').css('display','none');
+		    	var settingbox = $('#setbox');
+		    	var settingtext = $('#setting h3');
+		    	if(settingbox.css('display') == 'none'){
+		    		//非表示の場合
+		    		settingbox.css('display','block');
+		    		settingtext.text("新規通知登録");
+		    	}else{
+		    		//表示されてる場合
+		    		settingbox.css('display','none');
+		    		settingtext.text("通知設定変更");
+		    	
+		    	}
 		    });
 		    
 			 //UI Setting

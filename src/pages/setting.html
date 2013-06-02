@@ -4,192 +4,70 @@
 <meta http-equiv="Content-Type" Content="text/html;charset=UTF-8">
 <title>通知ったー トップページ</title>
 <link rel="stylesheet" href="./scripts/css/base.css" type="text/css">
-<link rel="stylesheet" href="./scripts/css/jquery-ui-1.10.3.custom.css"
-	type="text/css">
+<link rel="stylesheet" href="./scripts/css/jquery-ui-1.10.3.custom.css"	type="text/css">
 <script src="./scripts/js/jquery-1.9.1.js" type="text/javascript"></script>
-<script src="./scripts/js/jquery-ui-1.10.3.custom.js"
-	type="text/javascript"></script>
+<script src="./scripts/js/jquery-ui-1.10.3.custom.js" type="text/javascript"></script>
+<script src="./scripts/js/jquery.customwidget.js" type="text/javascript"></script>
+
 <script type="text/javascript">
 <!--
-	$(function(){	
-		  (function( $ ) {
-			    $.widget( "custom.combobox", {
-			      _create: function() {
-			        this.wrapper = $( "<span>" )
-			          .addClass( "custom-combobox" )
-			          .insertAfter( this.element );
-			 
-			        this.element.hide();
-			        this._createAutocomplete();
-			        this._createShowAllButton();
-			      },
-			 
-			      _createAutocomplete: function() {
-			        var selected = this.element.children( ":selected" ),
-			          value = selected.val() ? selected.text() : "";
-			 
-			        this.input = $( "<input>" )
-			          .appendTo( this.wrapper )
-			          .val( value )
-			          .attr( "title", "" )
-			          .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
-			          .autocomplete({
-			            delay: 0,
-			            minLength: 0,
-			            source: $.proxy( this, "_source" )
-			          })
-			          .tooltip({
-			            tooltipClass: "ui-state-highlight"
-			          });
-			 
-			        this._on( this.input, {
-			          autocompleteselect: function( event, ui ) {
-			            ui.item.option.selected = true;
-			            this._trigger( "select", event, {
-			              item: ui.item.option
-			   	     });
-			          },
-			 
-			          autocompletechange: "_removeIfInvalid"
-			        });
-			      },
-			 
-			      _createShowAllButton: function() {
-			        var input = this.input,
-			          wasOpen = false;
-			 
-			        $( "<a>" )
-			          .attr( "tabIndex", -1 )
-			         // .attr( "title", "通知を選んでください" )
-			          .tooltip()
-			          .appendTo( this.wrapper )
-			          .button({
-			            icons: {
-			              primary: "ui-icon-triangle-1-s"
-			            },
-			            text: false
-			          })
-			          .removeClass( "ui-corner-all" )
-			          .addClass( "custom-combobox-toggle ui-corner-right" )
-			          .mousedown(function() {
-			            wasOpen = input.autocomplete( "widget" ).is( ":visible" );
-			          })
-			          .click(function() {
-			            input.focus();
-			 
-			            // Close if already visible
-			            if ( wasOpen ) {
-			              return;
-			            }
-			 
-			            // Pass empty string as value to search for, displaying all results
-			            input.autocomplete( "search", "" );
-			          });
-			      },
-			 
-			      _source: function( request, response ) {
-			        var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
-			        response( this.element.children( "option" ).map(function() {
-			          var text = $( this ).text();
-			          if ( this.value && ( !request.term || matcher.test(text) ) )
-			            return {
-			              label: text,
-			              value: text,
-			              option: this
-			            };
-			        }) );
-			      },
-			 
-			      _removeIfInvalid: function( event, ui ) {
-			 
-			        // Selected an item, nothing to do
-			        if ( ui.item ) {
-			          return;
-			        }
-			 
-			        // Search for a match (case-insensitive)
-			        var value = this.input.val(),
-			          valueLowerCase = value.toLowerCase(),
-			          valid = false;
-			        this.element.children( "option" ).each(function() {
-			          if ( $( this ).text().toLowerCase() === valueLowerCase ) {
-			            this.selected = valid = true;
-			            return false;
-			          }
-			        });
-			 
-			        // Found a match, nothing to do
-			        if ( valid ) {
-			          return;
-			        }
-			 
-			        // Remove invalid value
-			        this.input
-			          .val( "" )
-			          .attr( "title", value + " didn't match any item" )
-			          .tooltip( "open" );
-			        this.element.val( "" );
-			        this._delay(function() {
-			          this.input.tooltip( "close" ).attr( "title", "" );
-			        }, 2500 );
-			        this.input.data( "ui-autocomplete" ).term = "";
-			      },
-			 
-			      _destroy: function() {
-			        this.wrapper.remove();
-			        this.element.show();
-			      }
-			    });
-			  })( jQuery );
-		    function setupLabel() {
-		        if ($('.radio input').length) {
-		            $('.radio').each(function(){ 
-		                $(this).removeClass('r_on');
 
-		            });
-		            $('.radio input:checked').each(function(){ 
-		                $(this).parent('label').addClass('r_on');
-		            });
-		        };
-		    };
-		    $('#setting h3').button();
-		    $('#setting h3').click(function(){
-		    	var settingbox = $('#setbox');
-		    	var settingtext = $('#setting h3');
-		    	if(settingbox.css('display') == 'none'){
-		    		//非表示の場合
-		    		settingbox.css('display','block');
-		    		settingtext.text("新規通知登録");
-		    	}else{
-		    		//表示されてる場合
-		    		settingbox.css('display','none');
-		    		settingtext.text("通知設定変更");
-		    	
-		    	}
-		    });
-		    
 			 //UI Setting
 			  $(document).ready(function() {
-			    $( ".combobox" ).combobox();
 				$( "#start" ).datepicker();
 				$( "#end" ).datepicker();
-
 				$( "#start" ).datepicker("option", "dateFormat","yy-mm-dd");
 				$( "#end" ).datepicker("option", "dateFormat","yy-mm-dd");
-				
-				//radio buttonUI event
-			        $('.radio').click(function(){
-			            setupLabel();
-			        });
-			        setupLabel(); 
-			 		 });
+				$('div.notice_title').addClass('notice_title ui-corner-all ui-button-text-only ui-state-hover');
+				$('#setting h3').button();
+					
+				//radio buttonUI　クリックしたときのイベント
+			  	  $('.radio').click(function(){
+				    	setupLabel();
+				   });
+			        setupLabel();
+			        
+					 //資格の通知するかしないかのボタン動作イベント
+					 $('span.notice_on, span.notice_off, span.n_on , span.n_off').click(function(){
+							var noticebar = $(this).parent('div').children('span');
+								changeNoticeBar(noticebar.next('span'));
+								changeNoticeBar(noticebar.prev('span'));
+					 });
+					 
+					 //新規登録するところの　クリックしたときのイベント
+					    $('#setting h3').click(function(){
+					    	var settingbox = $('#setbox');
+					    	var settingtext = $('#setting h3');
+					    	if(settingbox.css('display') == 'none'){
+					    		//非表示の場合
+					    		settingbox.css('display','block');
+					    		settingtext.text("新規通知登録");
+					    	}else{
+					    		//表示されてる場合
+					    		settingbox.css('display','none');
+					    		settingtext.text("設定変更");
+					    	
+					    	}
+					    });
+			 	});
 			 
-			 //資格の通知するかしないかのボタン動作
-			 $('span.notice_on, span.notice_off, span.n_on , span.n_off').click(function(){
-					var noticebar = $(this).parent('div').children('span');
-						changeNoticeBar(noticebar.next('span'));
-						changeNoticeBar(noticebar.prev('span'));
-			 });
+			 	//デザインの誤動作を直すため意図的にクリックさせる
+			  	$('#setting h3').click();
+			 
+				//ラジオボタンUI用
+			    function setupLabel() {
+			        if ($('.radio input').length) {
+			            $('.radio').each(function(){ 
+			                $(this).removeClass('r_on');
+
+			            });
+			            $('.radio input:checked').each(function(){ 
+			                $(this).parent('label').addClass('r_on');
+			            });
+			        };
+			    };
+			    
+			    //通知設定切り替え用
 			 function changeNoticeBar(e){
 				 //notice_onか notice_offを Class属性から取り出す
 				 var n_class = e.attr('class');
@@ -213,22 +91,14 @@
 				 }
 			 }
 			 
-			 
-			 
-			 $('div.notice_title').addClass('notice_title ui-corner-all ui-button-text-only ui-state-hover');
-			
-		});
+
 	
 
 -->
 	</script>
 <style type="text/css">
 <!--
-h4 {
-	margin: 20px;
-}
-
-/* ----------メインコンテンツ---------- */
+/* ====================メインコンテンツ==================== */
 #main {
 	width: 940px;
 	clear: both;
@@ -248,27 +118,27 @@ h1 ,h2,h3,h4{
 	margin: 10px auto;
 	text-align: left;
 	width: 900px;
-	height: 150px;
+	height: 190px;
 	border: 1px solid #AAA;
 }
 
-#main div#setbox>div {
+#main div#setbox>div.box {
 	float: left;
 	width: 160px;
-	height: 200px; /* 後で調整 */
+	height: 140px; /* 後で調整 */
 }
 
-#main div.box>p {
+#main div.box> p {
 	margin: 20px 20px;
 }
 
-#main div.box div>p {
+#main div.box div > p {
 	font-size: 0.75em;
 }
 
-/* #main div.box > div {
-	margin: 5px 20px;
-}*/
+#main div.calenderbox > div > p{
+	padding:5px 0;
+}
 #main div#select {
 	clear: both;
 }
@@ -281,7 +151,7 @@ h1 ,h2,h3,h4{
 	font: 70% "Trebuchet MS", sans-serif;
 }
 
-/* combobox size edit */
+/* ====================combobox size edit==================== */
 #setting input.custom-combobox-input {
 	width: 115px;
 	height: 20px;
@@ -297,6 +167,7 @@ h1 ,h2,h3,h4{
 	height: 21px;
 }
 
+/* ====================ラジオボタンデザイン==================== */
 .radio {
 	padding: 2px 0 2px 34px;
 	background: url(./scripts/css/images/radio_off.png) no-repeat;
@@ -310,11 +181,17 @@ label.r_on {
 	position: absolute;
 	left: -9999px;
 }
+#setting .button{
+	float:right;
+	margin:15px 50px 0 0;
+}
 
-/* 通知リストデザイン */
+
+/* ====================通知リストデザイン=================== */
 #list ul {
+	width:900px;
 	list-style: none;
-	margin:10px 25px;
+	margin:10px auto;
 }
 
 #list div.notice_title {
@@ -327,7 +204,7 @@ label.r_on {
 	padding: 10px 0;
 }
 
-#list li>div.l_text {
+#list li > div.l_text {
 	width: 60px;
 	float: left;
 	background-color: #CCC;
@@ -385,7 +262,7 @@ visibility:hidden;
 		</div>
 		<div id="main">
 			<div id="setting">
-				<h3>登録</h3>
+				<h3></h3>
 				<div id="setbox">
 					<div class="box" style="width: 210px;">
 						<p>通知名</p>
@@ -435,7 +312,7 @@ visibility:hidden;
 						</div>
 					</div>
 
-					<div class="box">
+					<div class="box calenderbox">
 						<p>通知期間</p>
 						<div>
 							<p>
@@ -455,7 +332,6 @@ visibility:hidden;
 					</div>
 
 					<div class="box">
-
 						<p>通知方法</p>
 						<div>
 							<label class="radio" for="do1"><input type="radio"
@@ -466,6 +342,7 @@ visibility:hidden;
 								name="do" value="3">自己DM</label><br>
 						</div>
 					</div>
+					<div class="button"><input type="button" value="設定"></div>
 				</div>
 			</div>
 			<div id="select">
